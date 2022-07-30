@@ -83,13 +83,13 @@ public class PlayerController : MonoBehaviour
       //    _isGrounded = true;
       //    _animator.SetBool(_isJumping, false);
       // }
-
+      //
       // if (collision.gameObject.TryGetComponent<TilemapCollider2D>(out TilemapCollider2D collider2D))
       // {
       //    _isGrounded = true;
       //    _animator.SetBool(_isJumping, false);
       // }
-
+      //
       // if (collision.gameObject.layer == _ground)
       // {
       //    _isGrounded = true;

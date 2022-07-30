@@ -623,7 +623,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: dcac12f809cd0485191faab34cc678f4, type: 2}
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -664,9 +664,9 @@ MonoBehaviour:
     m_Bits: 8
   _movementAcceleration: 50
   _maxMoveSpeed: 10
-  _linearDrag: 10
-  _groundRaycastLength: 1.8
-  _jumpForce: 12
+  _linearDrag: 6
+  _groundChecker: {fileID: 6047062801713682249}
+  _jumpForce: 10
   _airLinearDrag: 2.5
   _fallMultiplier: 8
   _lowJumpFallMultiplier: 5
@@ -686,7 +686,7 @@ GameObject:
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6047062801713682249
 Transform:
   m_ObjectHideFlags: 0
