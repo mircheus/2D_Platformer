@@ -14,8 +14,6 @@ using UnityEngine.UIElements;
 // 3. collision.gameObject.CompareTag("Ground") по тегу не лучшая проверка, либо GetComponent/TryGetComponent либо через физику и слои. 
 // 4. if(other.gameObject.TryGetComponent<Coin>(out Coin coin)) { Debug.Log("Coin picked up"); _audioSource.Play(); } звуковой эффект, лучше создавать самой монетке, + можно эффект подбора добавить.
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour
@@ -28,7 +26,6 @@ public class PlayerController : MonoBehaviour
    [SerializeField] private Transform _groundChecker;
    
    private Animator _animator;
-   private AudioSource _audioSource;
    private Rigidbody2D _rigidbody2D;
    private SpriteRenderer _spriteRenderer;
    private float _horizontalMovement;
@@ -43,7 +40,6 @@ public class PlayerController : MonoBehaviour
       _rigidbody2D = GetComponent<Rigidbody2D>();
       _spriteRenderer = GetComponent<SpriteRenderer>();
       _animator = GetComponent<Animator>();
-      _audioSource = GetComponent<AudioSource>();
    }
 
    private void Update()
@@ -54,17 +50,10 @@ public class PlayerController : MonoBehaviour
 
       if (Input.GetKeyDown(KeyCode.Space))
       {
-         _rigidbody2D.velocity = Vector2.up * _jumpForce;
+         _justJumped = true;
       }
       
-      if (_rigidbody2D.velocity.y < 0)
-      {
-         _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (_fallMultiplier - 1) * Time.deltaTime;
-      }
-      else if (_rigidbody2D.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
-      {
-         _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (_lowJumpMultiplier - 1) * Time.deltaTime;
-      }
+
    }
    
    private void FixedUpdate()
@@ -74,6 +63,16 @@ public class PlayerController : MonoBehaviour
          // _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
          //_rigidbody2D.velocity = Vector2.up * _jumpForce;
          _justJumped = false;
+         _rigidbody2D.velocity = Vector2.up * _jumpForce;
+         
+         if (_rigidbody2D.velocity.y < 0)
+         {
+            _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (_fallMultiplier - 1) * Time.deltaTime;
+         }
+         else if (_rigidbody2D.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+         {
+            _rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (_lowJumpMultiplier - 1) * Time.deltaTime;
+         }
       }  
    }
    
@@ -96,15 +95,6 @@ public class PlayerController : MonoBehaviour
       //    _isGrounded = true;
       //    _animator.SetBool(_isJumping, false);
       // }
-   }
-
-   private void OnTriggerEnter2D(Collider2D other)
-   {
-      if(other.gameObject.TryGetComponent<Coin>(out Coin coin))
-      {
-         // Debug.Log("Coin picked up");
-         _audioSource.Play();
-      }
    }
 
    private bool IsGround()
