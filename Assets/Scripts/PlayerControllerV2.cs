@@ -19,12 +19,13 @@ public class PlayerControllerV2 : MonoBehaviour
     [SerializeField] private float _movementAcceleration = 50f;
     [SerializeField] private float _maxMoveSpeed = 10f;
     [SerializeField] private float _linearDrag = 7f;
+    
     private float _horizontalDirection;
     
     [Header("Ground Checker")] 
     [SerializeField] private Transform _groundChecker;
-    private bool _onGround;
-    
+    [SerializeField] private float _circleRadius = 0.5f;
+
     [Header("Jump Variables")] 
     [SerializeField] private float _jumpForce = 12f;   
     [SerializeField] private float _airLinearDrag = 2.5f;
@@ -107,7 +108,9 @@ public class PlayerControllerV2 : MonoBehaviour
     
     private void ApplyGroundLinearDrag()
     {
-        if (Mathf.Abs(_horizontalDirection) < 0.4f || _changingDirection)
+        float minHorizontalDirectionValue = 0.4f;
+        
+        if (Mathf.Abs(_horizontalDirection) < minHorizontalDirectionValue || _changingDirection)
         {
             _rigidbody2D.drag = _linearDrag;
         }
@@ -119,6 +122,6 @@ public class PlayerControllerV2 : MonoBehaviour
     
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(_groundChecker.position, 0.5f, _groundLayer);
+        return Physics2D.OverlapCircle(_groundChecker.position, _circleRadius, _groundLayer);
     }
 }

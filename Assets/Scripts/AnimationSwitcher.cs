@@ -10,13 +10,16 @@ using UnityEngine.Tilemaps;
 [RequireComponent(typeof(SpriteRenderer))]
 public class AnimationSwitcher : MonoBehaviour
 {
+
+    [SerializeField] private Transform _groundChecker;
+    [SerializeField] private LayerMask _groundLayer;
+    
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private int _isMoving = Animator.StringToHash("isMoving");
     private int _isJumping = Animator.StringToHash("isJumping");
     private float _horizontalMovement;
-    private bool _isGrounded;
-    
+
     private void Start()
     {
         _animator = GetComponent<Animator>();
@@ -30,17 +33,10 @@ public class AnimationSwitcher : MonoBehaviour
         Jump();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<Ground>())
-        {
-           _isGrounded = true;
-           _animator.SetBool(_isJumping, false);
-        }
-    }
-
     private void MovePlayer()
     {
+        _animator.SetBool(_isJumping, !IsGrounded());
+        
         if (_horizontalMovement > 0)
         {
             _animator.SetBool(_isMoving, true);
@@ -56,22 +52,18 @@ public class AnimationSwitcher : MonoBehaviour
             _animator.SetBool(_isMoving, false);
         }
 
-        if (_isGrounded)
-        {
-            _animator.SetBool(_isJumping, false);
-        }
-        else
+    }
+
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             _animator.SetBool(_isJumping, true);
         }
     }
 
-    private void Jump()
+    private bool IsGrounded()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            _animator.SetBool(_isJumping, true);
-            _isGrounded = false;
-        }
+        return Physics2D.OverlapCircle(_groundChecker.position, 0.5f, _groundLayer);
     }
 }
