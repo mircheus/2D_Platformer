@@ -51,7 +51,6 @@ public class AnimationSwitcher : MonoBehaviour
         {
             _animator.SetBool(_isMoving, false);
         }
-
     }
 
     private void Jump()
