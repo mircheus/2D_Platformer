@@ -32,10 +32,10 @@ public class PlayerControllerV2 : MonoBehaviour
     [SerializeField] private float _fallMultiplier = 14f;
     [SerializeField] private float _lowJumpFallMultiplier = 5f;
 
-    private bool _changingDirection => (_rigidbody2D.velocity.x > 0f && _horizontalDirection < 0f) ||
+    private bool ChangingDirection => (_rigidbody2D.velocity.x > 0f && _horizontalDirection < 0f) ||
                                        (_rigidbody2D.velocity.x < 0f && _horizontalDirection > 0f);
     
-    private bool _canJump => Input.GetKeyDown(KeyCode.Space) && IsGrounded();
+    private bool CanJump => Input.GetKeyDown(KeyCode.Space) && IsGrounded();
 
     private void Start()
     {
@@ -45,12 +45,12 @@ public class PlayerControllerV2 : MonoBehaviour
     private void Update()
     {
         _horizontalDirection = GetInput().x;
-        if (_canJump) Jump();
+        if (CanJump) Jump();
     }
 
     private void FixedUpdate()
     {
-        MoveCharacter();
+        Move();
         
         if (IsGrounded())
         {
@@ -59,7 +59,7 @@ public class PlayerControllerV2 : MonoBehaviour
         else
         {
             ApplyAirLinearDrag();
-            FallMultiplier();
+            ApplyFallMultiplier();
         }
     }
     
@@ -69,7 +69,7 @@ public class PlayerControllerV2 : MonoBehaviour
         _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
 
-    private void FallMultiplier()
+    private void ApplyFallMultiplier()
     {
         if (_rigidbody2D.velocity.y < 0)
         {
@@ -95,7 +95,7 @@ public class PlayerControllerV2 : MonoBehaviour
         return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
-    private void MoveCharacter()
+    private void Move()
     {
         _rigidbody2D.AddForce(new Vector2(_horizontalDirection, 0f) * _movementAcceleration);
 
@@ -110,7 +110,7 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         float minHorizontalDirectionValue = 0.4f;
         
-        if (Mathf.Abs(_horizontalDirection) < minHorizontalDirectionValue || _changingDirection)
+        if (Mathf.Abs(_horizontalDirection) < minHorizontalDirectionValue || ChangingDirection)
         {
             _rigidbody2D.drag = _linearDrag;
         }

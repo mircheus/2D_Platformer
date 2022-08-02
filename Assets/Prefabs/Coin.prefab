@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pickupSound: {fileID: 8300000, guid: d63aa3e80f4e2485e84ec16e00493eae, type: 3}
-  _pickingUpFX: {fileID: 6445666186361868711, guid: ac9b9ec824a314b2d8a7c8b7229fba5b, type: 3}
+  _pickupVFX: {fileID: 6445666186361868711, guid: ac9b9ec824a314b2d8a7c8b7229fba5b, type: 3}
 --- !u!61 &383993523427446969
 BoxCollider2D:
   m_ObjectHideFlags: 0

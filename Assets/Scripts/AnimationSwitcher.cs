@@ -29,11 +29,11 @@ public class AnimationSwitcher : MonoBehaviour
     private void Update()
     {
         _horizontalMovement = Input.GetAxisRaw("Horizontal");
-        MovePlayer();
+        Move();
         Jump();
     }
 
-    private void MovePlayer()
+    private void Move()
     {
         _animator.SetBool(_isJumping, !IsGrounded());
         

@@ -11,7 +11,7 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerControllerV2>())
+        if (collision.TryGetComponent<PlayerControllerV2>(out var player))
         {
             AudioSource.PlayClipAtPoint(_pickupSound, transform.position);
             Instantiate(_pickupVFX, transform.position, Quaternion.identity);
