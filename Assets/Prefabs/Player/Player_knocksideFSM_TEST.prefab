@@ -76,9 +76,8 @@ GameObject:
   - component: {fileID: 8191077278810424466}
   - component: {fileID: 8191077278810424467}
   - component: {fileID: 8191077278810424464}
-  - component: {fileID: 8191077278810424465}
-  - component: {fileID: 8191077278810424477}
-  - component: {fileID: 483947221}
+  - component: {fileID: -5508430143094110138}
+  - component: {fileID: 6369076926700224793}
   m_Layer: 0
   m_Name: Player_knocksideFSM_TEST
   m_TagString: Untagged
@@ -223,7 +222,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8191077278810424465
+--- !u!114 &-5508430143094110138
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -232,19 +231,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8191077278810424468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb1d5cb8c697743c282d5806892d1abd, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b9b48449baf85a488e2cd5b6a2ef833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 10
-  _jumpForce: 8
-  _groundChecker: {fileID: 8191077280532556521}
-  _circleRadius: 0.382
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  _fallMultiplier: 2
-  _lowJumpFallMultilpier: 3
---- !u!114 &8191077278810424477
+  hitBox: {fileID: 0}
+  hitEffect: {fileID: 0}
+--- !u!114 &6369076926700224793
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -253,31 +245,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8191077278810424468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bd89ea4106044b5080fb3bb28bde833, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a4017cdf2d4902489c2553558e36fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundChecker: {fileID: 8191077280532556521}
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
---- !u!114 &483947221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8191077278810424468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b692ca0725ed045d389e68ff2401134a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attackPoint: {fileID: 478244315}
-  _damagePoints: 1
-  _attackRange: 0.8
-  _enemyLayer:
-    serializedVersion: 2
-    m_Bits: 512
+  customName: Combat
 --- !u!1 &8191077280532556526
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,3 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 549dbf47e29474c1e82c6719cc42aec3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  _enemy: {fileID: 0}
+  _shakeDuration: 0.15
+  _magnitude: 0.4

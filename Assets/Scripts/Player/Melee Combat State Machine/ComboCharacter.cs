@@ -9,7 +9,9 @@ public class ComboCharacter : MonoBehaviour
 
     [SerializeField] public Collider2D hitBox;
     [SerializeField] public GameObject hitEffect;
+    [SerializeField] private ParticleSystem _hitFX;
 
+    public ParticleSystem HitFX => _hitFX;
     private void Start()
     {
         _meleeStateMachine = GetComponent<StateMachine>();
