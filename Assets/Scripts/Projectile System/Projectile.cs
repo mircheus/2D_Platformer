@@ -11,6 +11,13 @@ public class Projectile : MonoBehaviour
     protected Rigidbody2D _rigidbody;
     private Vector2 _currentDirection;
 
+    public float Speed => _speed;
+    public Vector2 CurrentDirection => _currentDirection;
+
+    private void OnEnable()
+    {
+    }
+
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();

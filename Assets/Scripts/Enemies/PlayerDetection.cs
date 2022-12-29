@@ -14,6 +14,7 @@ public class PlayerDetection : MonoBehaviour
         if (col.TryGetComponent(out Player player))
         {
             PlayerDetected?.Invoke();
+            // Debug.Log("Player detected");
         }
     }
 }

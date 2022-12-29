@@ -14,32 +14,44 @@ public class EnemyShooting : ProjectilePool
     [SerializeField] private int _damage;
     [SerializeField] private PlayerDetection _detector;
     [SerializeField] private float _shootPauseDuration;
-
+    [SerializeField] private ParticleSystem _shootFX;
+    [SerializeField] private ParticleSystemRenderer _shootFXRenderer;
     [Range(-1, 1)] 
     [SerializeField] private int _shootDirection;
 
-    // private void OnEnable()
-    // {
-    //     _detector.PlayerDetected += OnPlayerDetected;
-    // }
-    //
-    // private void OnDisable()
-    // {
-    //     _detector.PlayerDetected -= OnPlayerDetected;
-    // }
+    private void OnEnable()
+    {
+        _detector.PlayerDetected += OnPlayerDetected;
+    }
+    
+    private void OnDisable()
+    {
+        _detector.PlayerDetected -= OnPlayerDetected;
+    }
 
     private void Start()
     {
         Initialize(_projectilePrefab, _projectileSpeed, _damage);
-        StartCoroutine(Firing());
+        // _shootFXRenderer.flip = Vector3.left;
+        // StartCoroutine(Firing());
         // ShootProjectile();
+        // InstantiateProjectile();
     }
-    
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            ShootProjectile();
+            // InstantiateProjectile();
+            // Debug.Log("Turret shooot key pressed");
+        }   
+    }
+
     private void OnPlayerDetected()
     {
-        // StopCoroutine(Firing());
-        // StartCoroutine(Firing());
+        StopCoroutine(Firing());
+        StartCoroutine(Firing());
         // ShootProjectile();
     }
 
@@ -48,10 +60,26 @@ public class EnemyShooting : ProjectilePool
         if (TryGetProjectile(out Projectile projectile))
         {
             projectile.transform.position = _currentShootPoint.position;
-            projectile.SetDirection(Vector2.right * _shootDirection); 
+            // Debug.Log($"position x:{projectile.transform.position.x} y:{projectile.transform.position.y}");
+            projectile.SetDirection(Vector2.right * _shootDirection);
+            // Debug.Log($"projectile speed: {projectile.Speed}");
+            // Debug.Log($"projectile current direction: x:{projectile.CurrentDirection.x} y:{projectile.CurrentDirection.y}");
             EnableObject(projectile);
-            Debug.Log("Projectile activated");
+            _shootFX.Play();
+            // Debug.Log("Projectile activated");
         }
+        else
+        {
+            // Debug.Log("Projectile are not activated");
+        }
+    }
+
+    private void InstantiateProjectile()
+    {
+        Projectile projectile = Instantiate(_projectilePrefab, _currentShootPoint.position, Quaternion.identity);
+        // Debug.Log($"projectile shooted at position X:{_currentShootPoint.position.x} Y:{_currentShootPoint.position.y}");
+        projectile.SetDirection(Vector2.right * -1); 
+        projectile.Initialize(0, 0);
     }
 
     private IEnumerator Firing()
