@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 8966394378408598352}
   - component: {fileID: 656438085}
   - component: {fileID: 656438086}
-  - component: {fileID: 7514001171417462491}
   - component: {fileID: 1565538164}
   - component: {fileID: 2740452209774226890}
   m_Layer: 0
@@ -353,37 +352,6 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
---- !u!114 &7514001171417462491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2936951375624277031}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb1d5cb8c697743c282d5806892d1abd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _movementSpeed: 9
-  _jumpForce: 8
-  _wallJumpForce: 15
-  _wallJumpLerp: 10
-  _groundChecker: {fileID: 6047062801713682249}
-  _circleRadius: 0.3
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  _fallMultiplier: 3
-  _lowJumpFallMultilpier: 5
-  _rightOffset: 0.5
-  _leftOffset: -0.5
-  _slideSpeed: 0.3
-  _wallJumped: 0
-  _isGrounded: 0
-  _isAbleToMove: 1
-  _isOnWall: 0
-  _directionRaw: {x: 0, y: 0}
 --- !u!114 &1565538164
 MonoBehaviour:
   m_ObjectHideFlags: 0

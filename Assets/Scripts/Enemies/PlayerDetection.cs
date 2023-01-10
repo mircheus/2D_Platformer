@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(BoxCollider2D))]
 public class PlayerDetection : MonoBehaviour
 {
     public event UnityAction PlayerDetected;
@@ -14,7 +13,7 @@ public class PlayerDetection : MonoBehaviour
         if (col.TryGetComponent(out Player player))
         {
             PlayerDetected?.Invoke();
-            // Debug.Log("Player detected");
+            Debug.Log("Player detected");
         }
     }
 }

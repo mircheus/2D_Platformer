@@ -9,20 +9,19 @@ public class EnemyProjectile : Projectile
     {
         // _rigidbody = GetComponent<Rigidbody2D>();
         // _rigidbody.velocity = (Vector2.up) * _speed;
-        Debug.Log("turret projectile enabled");
+        // Debug.Log("turret projectile enabled");
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    protected override void OnCollisionEnter2D(Collision2D col) 
     {
+        base.OnCollisionEnter2D(col);
+        
         if (col.gameObject.TryGetComponent(out Player player))
         {
             player.TakeDamage(_damage);
             ReturnToPool();
         }
-        
-        // if (col.gameObject.layer == 3) // надо это как-то вынести в общий метод projectile
-        // {
-        //     ReturnToPool();
-        // }
     }
+    
+    
 }

@@ -14,8 +14,13 @@ public class Projectile : MonoBehaviour
     public float Speed => _speed;
     public Vector2 CurrentDirection => _currentDirection;
 
-    private void OnEnable()
+    protected virtual void OnCollisionEnter2D(Collision2D col)
     {
+        if (col.gameObject.TryGetComponent(out Ground ground))
+        {
+            Debug.Log("Collided with ground");
+            ReturnToPool();
+        }
     }
 
     private void Start()
@@ -39,9 +44,8 @@ public class Projectile : MonoBehaviour
         _currentDirection = direction;
     }
 
-    protected void Move()
+    private void Move()
     {
-        // transform.Translate(Vector3.right * _speed * Time.deltaTime);
         _rigidbody.velocity = _currentDirection * _speed;
     }
     
